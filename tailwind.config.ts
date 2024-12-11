@@ -7,6 +7,12 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontWeight: {
+      bold: '700',
+      semibold: '600',
+      normal: '400',
+      light: '300',
+    },
     extend: {
       colors: {
         primaryBackground: 'var(--primaryBackground)',
