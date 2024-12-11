@@ -1,5 +1,31 @@
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 import './globals.css';
+
+const pretendard = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Pretendard-Bold.subset.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Pretendard-Semibold.subset.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Pretendard-Regular.subset.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Pretendard-Light.subset.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+  ],
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -12,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={``}>{children}</body>
+    <html lang="ko">
+      <body className={`${pretendard.className}`}>{children}</body>
     </html>
   );
 }
