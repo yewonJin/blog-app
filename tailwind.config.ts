@@ -14,6 +14,10 @@ export default {
       light: '300',
     },
     extend: {
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+        jetBrainsMono: ['var(--font-jetBrainsMono)'],
+      },
       colors: {
         primaryBackground: 'var(--primaryBackground)',
         secondaryBackground: 'var(--secondaryBackground)',
