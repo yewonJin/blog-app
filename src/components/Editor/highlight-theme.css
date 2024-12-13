@@ -1,0 +1,128 @@
+/**
+   * Panda Syntax Theme for Highlight.js
+   * Based on: https://github.com/tinkertrain/panda-syntax-vscode
+   * Author: Annmarie Switzer <https://github.com/annmarie-switzer>
+   */
+
+:root {
+  --panda-syntax-background: #e6e6e6;
+  --panda-syntax-color: #2a2c2d;
+  --panda-syntax-comment-quote: #676b79;
+  --panda-syntax-italic: #676b79;
+  --panda-syntax-punctuation-attr: #2a2c2d;
+  --panda-syntax-selector-tag-meta: #c56200;
+  --panda-syntax-operator-escape: #b084eb;
+  --panda-syntax-keyword-deletion: #d92792;
+  --panda-syntax-regexp-variable-pseudo: #cc5e91;
+  --panda-syntax-subst-property-section: #3787c7;
+  --panda-syntax-string-symbol-class: #0d7d6c;
+  --panda-syntax-variable-number-type: #7641bb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --panda-syntax-background: #2a2c2d;
+    --panda-syntax-color: #e6e6e6;
+    --panda-syntax-comment-quote: #bbbbbb;
+    --panda-syntax-italic: #bbbbbb;
+    --panda-syntax-punctuation-attr: #e6e6e6;
+    --panda-syntax-selector-tag-meta: #ff4b82;
+    --panda-syntax-operator-escape: #b084eb;
+    --panda-syntax-keyword-deletion: #ff75b5;
+    --panda-syntax-regexp-variable-pseudo: #ff9ac1;
+    --panda-syntax-subst-property-section: #45a9f9;
+    --panda-syntax-string-symbol-class: #19f9d8;
+    --panda-syntax-variable-number-type: #ffb86c;
+  }
+}
+
+.hljs {
+  color: var(--panda-syntax-color);
+  overflow-x: auto;
+  background: var(--panda-syntax-background);
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+}
+
+.hljs > code {
+  padding: 0;
+  font-family: var(--font-jetBrainsMono);
+  background: none;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: bold;
+}
+.hljs-link {
+  text-decoration: underline;
+}
+.hljs-comment,
+.hljs-quote {
+  color: var(--panda-syntax-comment-quote);
+  font-style: italic;
+}
+.hljs-params {
+  color: var(--panda-syntax-comment-quote);
+}
+.hljs-punctuation,
+.hljs-attr {
+  color: var(--panda-syntax-punctuation-attr);
+}
+.hljs-selector-tag,
+.hljs-name,
+.hljs-meta {
+  color: var(--panda-syntax-selector-tag-meta);
+}
+.hljs-operator,
+.hljs-char.escape_ {
+  color: var(--panda-syntax-operator-escape);
+}
+.hljs-keyword,
+.hljs-deletion {
+  color: var(--panda-syntax-keyword-deletion);
+}
+.hljs-regexp,
+.hljs-selector-pseudo,
+.hljs-selector-attr,
+.hljs-variable.language_ {
+  color: var(--panda-syntax-regexp-variable-pseudo);
+}
+.hljs-subst,
+.hljs-property,
+.hljs-code,
+.hljs-formula,
+.hljs-section,
+.hljs-title.function_ {
+  color: var(--panda-syntax-subst-property-section);
+}
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition,
+.hljs-selector-class,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-meta .hljs-string {
+  color: var(--panda-syntax-string-symbol-class);
+}
+.hljs-variable,
+.hljs-template-variable,
+.hljs-number,
+.hljs-literal,
+.hljs-type,
+.hljs-link,
+.hljs-built_in,
+.hljs-title,
+.hljs-selector-id,
+.hljs-tag,
+.hljs-doctag,
+.hljs-attribute,
+.hljs-template-tag,
+.hljs-meta .hljs-keyword,
+.hljs-punctuation {
+  color: var(--panda-syntax-variable-number-type);
+}
