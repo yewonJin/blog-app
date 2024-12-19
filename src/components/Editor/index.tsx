@@ -3,8 +3,8 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 
 import { extensions } from './extensions';
-import './highlight-theme.css';
-import './typography.css';
+import '@/shared/highlight-theme.css';
+import '@/shared/typography.css';
 
 // TODO: 링크 + 이미지
 export default function Editor() {
@@ -14,8 +14,7 @@ export default function Editor() {
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class:
-          'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none',
+        class: 'prose prose-lg m-5 focus:outline-none',
       },
     },
   });
