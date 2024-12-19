@@ -1,4 +1,6 @@
+/** @type {import('tailwindcss').Config} */
 import type { Config } from 'tailwindcss';
+import typography from '@tailwindcss/typography';
 
 export default {
   content: [
@@ -14,6 +16,10 @@ export default {
       light: '300',
     },
     extend: {
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+        jetBrainsMono: ['var(--font-jetBrainsMono)'],
+      },
       colors: {
         primaryBackground: 'var(--primaryBackground)',
         secondaryBackground: 'var(--secondaryBackground)',
@@ -25,5 +31,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 } satisfies Config;

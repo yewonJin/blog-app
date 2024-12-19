@@ -25,6 +25,13 @@ const pretendard = localFont({
       style: 'normal',
     },
   ],
+  variable: '--font-pretendard',
+});
+
+const jetBrainsMono = localFont({
+  src: '../../public/fonts/JetBrainsMono-Regular.woff2',
+  weight: '400',
+  variable: '--font-jetBrainsMono',
 });
 
 export const metadata: Metadata = {
@@ -39,7 +46,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.className}`}>{children}</body>
+      <body
+        className={`${pretendard.className} ${pretendard.variable} ${jetBrainsMono.variable}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
