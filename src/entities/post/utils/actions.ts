@@ -41,6 +41,45 @@ export const createPostAction = async (
   }
 };
 
+const updatePostSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  content: z.string(),
+});
+
+export const updatePostAction = async (
+  prevState: { message: string },
+  formData: FormData,
+) => {
+  const validatedBody = updatePostSchema.safeParse({
+    id: Number(formData.get('id')),
+    title: formData.get('title'),
+    content: formData.get('content'),
+  });
+
+  if (!validatedBody.success) {
+    return { message: '입력 값이 잘못되었습니다.' };
+  }
+
+  try {
+    await prisma.post.update({
+      where: {
+        id: validatedBody.data.id,
+      },
+      data: {
+        title: validatedBody.data.title,
+        content: JSON.parse(validatedBody.data.content),
+        updatedAt: new Date(),
+      },
+    });
+
+    return { message: '포스트 수정 성공' };
+  } catch (e) {
+    console.error(e);
+    return { message: '포스트 수정 실패' };
+  }
+};
+
 export const uploadImage = async (formData: FormData) => {
   const files = formData.getAll('file') as File[];
   const urls: string[] = [];
