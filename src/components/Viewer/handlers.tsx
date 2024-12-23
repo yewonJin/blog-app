@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -6,6 +7,7 @@ import {
   renderSyntaxHighlightedCode,
 } from './highlight';
 import { TipTapMarkHandlers, TipTapNodeHandlers } from './interface';
+import { styleToObject } from '@/shared/utils';
 
 export const markHandlers: TipTapMarkHandlers = {
   bold: (props) => <strong key={uuidv4()}>{props.children}</strong>,
@@ -69,5 +71,16 @@ export const nodeHandlers: TipTapNodeHandlers = {
   horizontalRule: () => <hr />,
   blockquote: (props) => (
     <blockquote key={uuidv4()}>{props.children}</blockquote>
+  ),
+  image: (props) => (
+    <Image
+      key={uuidv4()}
+      width={0}
+      height={0}
+      sizes="800px"
+      alt="이미지"
+      src={props.node.attrs.src}
+      style={{ ...styleToObject(props.node.attrs.style) }}
+    />
   ),
 };

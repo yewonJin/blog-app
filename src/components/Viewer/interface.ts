@@ -12,6 +12,7 @@ export type TipTapNodeHandlers = {
   bulletList: TipTapNodeHandler;
   codeBlock: TipTapNodeHandler<CodeBlockNode>;
   horizontalRule: TipTapNodeHandler;
+  image: TipTapNodeHandler<ImageNode>;
 };
 
 export type TipTapMarkHandlers = {
@@ -67,5 +68,13 @@ export interface CodeBlockNode extends TipTapNode {
   type: 'codeBlock';
   attrs: {
     language: string;
+  };
+}
+
+export interface ImageNode extends TipTapNode {
+  type: 'image';
+  attrs: {
+    src: string;
+    style: string;
   };
 }

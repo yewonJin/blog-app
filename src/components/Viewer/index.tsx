@@ -1,4 +1,5 @@
 import '@/shared/highlight-theme.css';
+import '@/shared/typography.css';
 import { markHandlers, nodeHandlers } from './handlers';
 import {
   CodeBlockNode,
