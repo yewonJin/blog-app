@@ -1,8 +1,45 @@
 'use server';
 
+import { PrismaClient } from '@prisma/client';
+import { z } from 'zod';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 
 import { s3, S3_URL } from '../libs/aws';
+
+const prisma = new PrismaClient();
+
+const createPostSchema = z.object({
+  title: z.string(),
+  content: z.string(),
+});
+
+export const createPostAction = async (
+  prevState: { message: string },
+  formData: FormData,
+) => {
+  const validatedBody = createPostSchema.safeParse({
+    title: formData.get('title'),
+    content: formData.get('content'),
+  });
+
+  if (!validatedBody.success) {
+    return { message: '입력 값이 잘못되었습니다.' };
+  }
+
+  try {
+    await prisma.post.create({
+      data: {
+        title: validatedBody.data.title,
+        content: JSON.parse(validatedBody.data.content),
+      },
+    });
+
+    return { message: '포스트 생성 성공' };
+  } catch (e) {
+    console.error(e);
+    return { message: '포스트 생성 실패' };
+  }
+};
 
 export const uploadImage = async (formData: FormData) => {
   const files = formData.getAll('file') as File[];

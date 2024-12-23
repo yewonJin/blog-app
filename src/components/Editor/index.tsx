@@ -6,19 +6,18 @@ import { extensions } from './extensions';
 import '@/shared/highlight-theme.css';
 import '@/shared/typography.css';
 import { uploadImage } from '@/entities/post/utils/actions';
+import { TipTapNode } from '../Viewer/interface';
 
 type EditorProps = {
+  content: TipTapNode;
   onEditorUpdate: ({ editor }: { editor: EditorType }) => void;
 };
 
-// TODO: 이미지
-export default function Editor({
-  onEditorUpdate: handleEditorUpdate,
-}: EditorProps) {
+export default function Editor({ content, onEditorUpdate }: EditorProps) {
   const editor = useEditor({
     extensions,
-    content: '<p>Hello World! 🌎️</p>',
     immediatelyRender: false,
+    content,
     editorProps: {
       attributes: {
         class: 'prose prose-lg focus:outline-none !max-w-none',
@@ -55,10 +54,8 @@ export default function Editor({
         event.preventDefault();
       },
     },
-    onUpdate: handleEditorUpdate,
+    onUpdate: onEditorUpdate,
   });
-
-  console.log(editor?.getJSON());
 
   return <EditorContent editor={editor} />;
 }
