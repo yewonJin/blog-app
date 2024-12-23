@@ -2,6 +2,8 @@ import { Extensions } from '@tiptap/react';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
+import Image from '@tiptap/extension-image';
+import ImageResize from 'tiptap-extension-resize-image';
 import css from 'highlight.js/lib/languages/css';
 import js from 'highlight.js/lib/languages/javascript';
 import ts from 'highlight.js/lib/languages/typescript';
@@ -22,4 +24,6 @@ export const extensions: Extensions = [
     lowlight,
     HTMLAttributes: { class: 'hljs' },
   }),
+  Image,
+  ImageResize,
 ];
