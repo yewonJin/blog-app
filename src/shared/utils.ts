@@ -1,6 +1,14 @@
 import { ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+export const addDashes = (title: string) => {
+  return title.replace(/\s+/g, '-');
+};
+
+export const removeDashes = (title: string) => {
+  return title.replace(/-/g, ' ');
+};
+
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
