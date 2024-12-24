@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import TopNav from '@/widgets/TopNav';
+import { setInitialThemeMode } from '@/features/theme';
 
 const pretendard = localFont({
   src: [
@@ -45,10 +47,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body
         className={`${pretendard.className} ${pretendard.variable} ${jetBrainsMono.variable}`}
       >
+        <script
+          dangerouslySetInnerHTML={{ __html: setInitialThemeMode }}
+        ></script>
+        <TopNav />
         {children}
       </body>
     </html>
