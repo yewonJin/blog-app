@@ -44,6 +44,8 @@ export const createPostAction = async (
     console.log(e);
     return { message: POST_MESSAGE.ERROR.CREATE_FAILED, formData };
   }
+
+  redirect(`/post/${addDashes(encodeURI(validatedBody.data.title))}`);
 };
 
 const updatePostSchema = z.object({
@@ -84,6 +86,8 @@ export const updatePostAction = async (
     console.log(e);
     return { message: POST_MESSAGE.ERROR.UPDATE_FAILED, formData };
   }
+
+  redirect(`/post/${addDashes(encodeURI(validatedBody.data.title))}`);
 };
 
 export const uploadImage = async (formData: FormData) => {
