@@ -30,7 +30,7 @@ export const nodeHandlers: TipTapNodeHandlers = {
   doc: (props) => (
     <div
       key={uuidv4()}
-      className="tiptap ProseMirror prose prose-lg m-5 focus:outline-none"
+      className="prose prose-lg !max-w-none focus:outline-none"
     >
       {props.children}
     </div>
