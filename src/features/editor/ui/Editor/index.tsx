@@ -2,18 +2,18 @@
 
 import { useEditor, EditorContent, Editor as EditorType } from '@tiptap/react';
 
-import { extensions } from './extensions';
+import { extensions } from '../../utils/extensions';
 import '@/shared/highlight-theme.css';
 import '@/shared/typography.css';
-import { uploadImage } from '@/entities/post/utils/actions';
-import { TipTapNode } from '../Viewer/interface';
+import { uploadImage } from '@/entities/post';
+import { TipTapNode } from '@/entities/node';
 
 type EditorProps = {
   content: TipTapNode;
   onEditorUpdate: ({ editor }: { editor: EditorType }) => void;
 };
 
-export default function Editor({ content, onEditorUpdate }: EditorProps) {
+export function Editor({ content, onEditorUpdate }: EditorProps) {
   const editor = useEditor({
     extensions,
     immediatelyRender: false,

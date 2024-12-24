@@ -4,9 +4,9 @@ import { Post } from '@prisma/client';
 import { Editor as EditorType } from '@tiptap/react';
 import { useActionState, useRef } from 'react';
 
-import ScrollableContainer from '@/shared/layout/ScrollableContainer';
-import Editor from '../Editor';
-import { TipTapNode } from '../Viewer/interface';
+import { TipTapNode } from '@/entities/node';
+import { Editor } from '@/features/editor';
+import { ScrollableContainer } from '@/shared/layout';
 
 const initialState = {
   message: '',
@@ -20,7 +20,7 @@ type Props = {
   ) => Promise<{ message: string }>;
 };
 
-export default function EditorForm({ post, action }: Props) {
+export function EditorForm({ post, action }: Props) {
   const [state, formAction] = useActionState(action, initialState);
   const contentInputRef = useRef<HTMLInputElement>(null);
 

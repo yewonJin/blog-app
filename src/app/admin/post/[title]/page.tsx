@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
+import { updatePostAction } from '@/entities/post';
+import { EditorForm } from '@/widgets/EditorForm';
 import { removeDashes } from '@/shared/utils';
-import EditorForm from '@/components/EditorForm';
-import { updatePostAction } from '@/entities/post/utils/actions';
 
 const prisma = new PrismaClient();
 

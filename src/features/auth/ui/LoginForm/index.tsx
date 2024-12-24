@@ -8,7 +8,7 @@ const initialState = {
   message: '',
 };
 
-export default function LoginForm() {
+export function LoginForm() {
   const [state, formAction] = useActionState(loginAction, initialState);
 
   return (

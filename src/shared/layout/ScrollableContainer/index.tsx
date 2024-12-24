@@ -8,11 +8,7 @@ type Props = {
   maxHeight?: Tailwindest['maxHeight'];
 };
 
-export default function ScrollableContainer({
-  children,
-  height,
-  maxHeight,
-}: Props) {
+export function ScrollableContainer({ children, height, maxHeight }: Props) {
   return (
     <div className={cn(height, maxHeight, 'scrollbar overflow-y-auto')}>
       {children}

@@ -5,8 +5,8 @@ import {
   getHighlightedElements,
   getHighlightedLanguage,
   renderSyntaxHighlightedCode,
-} from './highlight';
-import { TipTapMarkHandlers, TipTapNodeHandlers } from './interface';
+} from '../../utils/highlight';
+import { TipTapMarkHandlers, TipTapNodeHandlers } from '@/entities/node';
 import { styleToObject } from '@/shared/utils';
 
 export const markHandlers: TipTapMarkHandlers = {

@@ -1,5 +1,5 @@
-import { createPostAction } from '@/entities/post/utils/actions';
-import EditorForm from '@/components/EditorForm';
+import { createPostAction } from '@/entities/post';
+import { EditorForm } from '@/widgets/EditorForm';
 
 export default function Page() {
   return <EditorForm action={createPostAction} />;

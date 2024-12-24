@@ -1,6 +1,7 @@
-import { isVerifiedJWT } from '@/features/auth/utils/jwt';
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
+
+import { isVerifiedJWT } from '@/features/auth';
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/admin')) {

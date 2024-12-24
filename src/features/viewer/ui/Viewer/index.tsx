@@ -8,7 +8,7 @@ import {
   TextNode,
   TipTapMark,
   TipTapNode,
-} from './interface';
+} from '@/entities/node';
 
 type TipTapViewerProps = {
   node: TipTapNode;
@@ -38,9 +38,7 @@ const createMarkedContent = (
   return text;
 };
 
-export default function TiptapViewer({
-  node,
-}: TipTapViewerProps): React.ReactNode {
+export function TiptapViewer({ node }: TipTapViewerProps): React.ReactNode {
   const children: React.ReactNode[] = [];
 
   if (node.content) {
