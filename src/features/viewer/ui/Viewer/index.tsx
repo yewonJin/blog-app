@@ -1,13 +1,15 @@
 import '@/shared/highlight-theme.css';
+import '@/shared/typography.css';
 import { markHandlers, nodeHandlers } from './handlers';
 import {
   CodeBlockNode,
   HeadingNode,
+  ImageNode,
   LinkMark,
   TextNode,
   TipTapMark,
   TipTapNode,
-} from './interface';
+} from '@/entities/node';
 
 type TipTapViewerProps = {
   node: TipTapNode;
@@ -37,9 +39,7 @@ const createMarkedContent = (
   return text;
 };
 
-export default function TiptapViewer({
-  node,
-}: TipTapViewerProps): React.ReactNode {
+export function TiptapViewer({ node }: TipTapViewerProps): React.ReactNode {
   const children: React.ReactNode[] = [];
 
   if (node.content) {
@@ -67,6 +67,11 @@ export default function TiptapViewer({
   } else if (node.type === 'heading') {
     return nodeHandlers['heading']({
       node: node as HeadingNode,
+      children,
+    });
+  } else if (node.type === 'image') {
+    return nodeHandlers['image']({
+      node: node as ImageNode,
       children,
     });
   } else if (node.type === 'paragraph' && !node.content) {
