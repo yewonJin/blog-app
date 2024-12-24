@@ -4,6 +4,7 @@ import { markHandlers, nodeHandlers } from './handlers';
 import {
   CodeBlockNode,
   HeadingNode,
+  ImageNode,
   LinkMark,
   TextNode,
   TipTapMark,
@@ -66,6 +67,11 @@ export function TiptapViewer({ node }: TipTapViewerProps): React.ReactNode {
   } else if (node.type === 'heading') {
     return nodeHandlers['heading']({
       node: node as HeadingNode,
+      children,
+    });
+  } else if (node.type === 'image') {
+    return nodeHandlers['image']({
+      node: node as ImageNode,
       children,
     });
   } else if (node.type === 'paragraph' && !node.content) {
