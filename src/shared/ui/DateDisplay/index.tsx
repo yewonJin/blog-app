@@ -27,7 +27,7 @@ export function DateDisplay({ date, className }: Props) {
     <p
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={cn('text-md text-secondaryText', className)}
+      className={cn('text-md text-neutral-secondary', className)}
     >
       {isHovered ? dateString : relativeTime}
     </p>

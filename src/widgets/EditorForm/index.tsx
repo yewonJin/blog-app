@@ -36,7 +36,7 @@ export function EditorForm({ post, action }: Props) {
       <div className="mb-5 flex justify-between">
         <input
           placeholder="제목을 입력해주세요..."
-          className="border-b-[1px] border-secondaryBackground bg-primaryBackground pb-2 text-3xl font-semibold outline-none"
+          className="bg-neutral-primary border-neutral-tertiary border-b-2 pb-2 text-3xl font-semibold outline-none"
           type="text"
           name="title"
           defaultValue={(state.formData.get('title') as string) ?? post?.title}
@@ -61,7 +61,7 @@ export function EditorForm({ post, action }: Props) {
       </ScrollableContainer>
       <div className="flex gap-2">
         <p>{state.message}</p>
-        <button className="rounded-md bg-secondaryBackground px-4 py-2">
+        <button className="bg-neutral-secondary hover:bg-neutral-tertiary rounded-md px-4 py-2">
           추가
         </button>
       </div>

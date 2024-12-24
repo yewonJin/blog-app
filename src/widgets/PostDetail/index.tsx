@@ -12,7 +12,9 @@ export default function PostDetail({ post }: Props) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-end justify-between">
-        <h1 className="text-3xl font-semibold">{post.title}</h1>
+        <h1 className="text-neutral-emphasis text-3xl font-semibold">
+          {post.title}
+        </h1>
         <DateDisplay date={new Date(post.updatedAt)} />
       </div>
       <Divider direction="horizontal" className="w-full" />
