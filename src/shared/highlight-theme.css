@@ -19,21 +19,19 @@
   --panda-syntax-variable-number-type: #7641bb;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --panda-syntax-background: #2a2c2d;
-    --panda-syntax-color: #e6e6e6;
-    --panda-syntax-comment-quote: #bbbbbb;
-    --panda-syntax-italic: #bbbbbb;
-    --panda-syntax-punctuation-attr: #e6e6e6;
-    --panda-syntax-selector-tag-meta: #ff4b82;
-    --panda-syntax-operator-escape: #b084eb;
-    --panda-syntax-keyword-deletion: #ff75b5;
-    --panda-syntax-regexp-variable-pseudo: #ff9ac1;
-    --panda-syntax-subst-property-section: #45a9f9;
-    --panda-syntax-string-symbol-class: #19f9d8;
-    --panda-syntax-variable-number-type: #ffb86c;
-  }
+html[data-theme='dark'] {
+  --panda-syntax-background: #2a2c2d;
+  --panda-syntax-color: #e6e6e6;
+  --panda-syntax-comment-quote: #bbbbbb;
+  --panda-syntax-italic: #bbbbbb;
+  --panda-syntax-punctuation-attr: #e6e6e6;
+  --panda-syntax-selector-tag-meta: #ff4b82;
+  --panda-syntax-operator-escape: #b084eb;
+  --panda-syntax-keyword-deletion: #ff75b5;
+  --panda-syntax-regexp-variable-pseudo: #ff9ac1;
+  --panda-syntax-subst-property-section: #45a9f9;
+  --panda-syntax-string-symbol-class: #19f9d8;
+  --panda-syntax-variable-number-type: #ffb86c;
 }
 
 .hljs {
