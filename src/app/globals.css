@@ -54,7 +54,13 @@
   --text-neutral-tertiary: var(--gray-600);
 
   --text-brand-primary: #1378ae;
-  --text-onbrand-primary: var(--gray-100);
+  --text-error-primary: var(--red-600);
+  --text-warning-primary: var(--orange-500);
+  --text-success-primary: var(--green-600);
+
+  --border-neutral-primary: var(--gray-100);
+  --border-neutral-secondary: var(--gray-200);
+  --border-neutral-tertiary: var(--gray-300);
 }
 
 html[data-theme='dark'] {
@@ -71,6 +77,10 @@ html[data-theme='dark'] {
   --text-neutral-primary: var(--gray-200);
   --text-neutral-secondary: var(--gray-300);
   --text-neutral-tertiary: var(--gray-400);
+
+  --border-neutral-primary: var(--gray-800);
+  --border-neutral-secondary: var(--gray-700);
+  --border-neutral-tertiary: var(--gray-600);
 }
 
 body {
