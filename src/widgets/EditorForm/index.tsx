@@ -7,17 +7,19 @@ import { useActionState, useRef } from 'react';
 import { TipTapNode } from '@/entities/node';
 import { Editor } from '@/features/editor';
 import { ScrollableContainer } from '@/shared/layout';
+import { PostFormState } from '@/entities/post';
 
 const initialState = {
   message: '',
+  formData: new FormData(),
 };
 
 type Props = {
   post?: Post;
   action: (
-    prevState: { message: string },
+    prevState: PostFormState,
     formData: FormData,
-  ) => Promise<{ message: string }>;
+  ) => Promise<PostFormState>;
 };
 
 export function EditorForm({ post, action }: Props) {
@@ -37,7 +39,7 @@ export function EditorForm({ post, action }: Props) {
           className="border-b-[1px] border-secondaryBackground bg-primaryBackground pb-2 text-3xl font-semibold outline-none"
           type="text"
           name="title"
-          defaultValue={post?.title}
+          defaultValue={(state.formData.get('title') as string) ?? post?.title}
         />
       </div>
       <input id="id" name="id" defaultValue={post?.id} hidden />
@@ -45,7 +47,10 @@ export function EditorForm({ post, action }: Props) {
         id="content"
         name="content"
         ref={contentInputRef}
-        defaultValue={JSON.stringify(post?.content)}
+        defaultValue={
+          (state.formData.get('content') as string) ??
+          JSON.stringify(post?.content)
+        }
         hidden
       />
       <ScrollableContainer height="h-[80vh]" maxHeight="max-h-[80vh]">

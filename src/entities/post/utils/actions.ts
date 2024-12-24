@@ -3,18 +3,22 @@
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
+import { redirect } from 'next/navigation';
 
-import { s3, S3_URL } from '../libs/aws';
+import { s3, S3_URL } from './aws';
+import { PostFormState } from '../models/postTypes';
+import { POST_MESSAGE } from '../configs/messages';
+import { addDashes } from '@/shared/utils';
 
 const prisma = new PrismaClient();
 
 const createPostSchema = z.object({
-  title: z.string(),
-  content: z.string(),
+  title: z.string().nonempty(POST_MESSAGE.ERROR.TITLE_REQUIRED),
+  content: z.string().nonempty(POST_MESSAGE.ERROR.CONTENT_REQUIRED),
 });
 
 export const createPostAction = async (
-  prevState: { message: string },
+  prevState: PostFormState,
   formData: FormData,
 ) => {
   const validatedBody = createPostSchema.safeParse({
@@ -23,7 +27,10 @@ export const createPostAction = async (
   });
 
   if (!validatedBody.success) {
-    return { message: '입력 값이 잘못되었습니다.' };
+    return {
+      message: validatedBody.error.errors[0].message,
+      formData,
+    };
   }
 
   try {
@@ -33,18 +40,16 @@ export const createPostAction = async (
         content: JSON.parse(validatedBody.data.content),
       },
     });
-
-    return { message: '포스트 생성 성공' };
   } catch (e) {
-    console.error(e);
-    return { message: '포스트 생성 실패' };
+    console.log(e);
+    return { message: POST_MESSAGE.ERROR.CREATE_FAILED, formData };
   }
 };
 
 const updatePostSchema = z.object({
   id: z.number(),
-  title: z.string(),
-  content: z.string(),
+  title: z.string().nonempty(POST_MESSAGE.ERROR.TITLE_REQUIRED),
+  content: z.string().nonempty(POST_MESSAGE.ERROR.CONTENT_REQUIRED),
 });
 
 export const updatePostAction = async (
@@ -58,7 +63,10 @@ export const updatePostAction = async (
   });
 
   if (!validatedBody.success) {
-    return { message: '입력 값이 잘못되었습니다.' };
+    return {
+      message: validatedBody.error.errors[0].message,
+      formData,
+    };
   }
 
   try {
@@ -72,11 +80,9 @@ export const updatePostAction = async (
         updatedAt: new Date(),
       },
     });
-
-    return { message: '포스트 수정 성공' };
   } catch (e) {
-    console.error(e);
-    return { message: '포스트 수정 실패' };
+    console.log(e);
+    return { message: POST_MESSAGE.ERROR.UPDATE_FAILED, formData };
   }
 };
 
