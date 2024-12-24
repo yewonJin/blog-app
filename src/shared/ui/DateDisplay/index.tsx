@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { cn, getDateString, getRelativeTime } from '@/shared/utils';
 
@@ -11,6 +11,9 @@ type Props = {
 
 export function DateDisplay({ date, className }: Props) {
   const [isHovered, setIsHovered] = useState(false);
+
+  const relativeTime = useMemo(() => getRelativeTime(date), []);
+  const dateString = useMemo(() => getDateString(date), []);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -26,7 +29,7 @@ export function DateDisplay({ date, className }: Props) {
       onMouseLeave={handleMouseLeave}
       className={cn('text-md text-secondaryText', className)}
     >
-      {isHovered ? getDateString(date) : getRelativeTime(date)}
+      {isHovered ? dateString : relativeTime}
     </p>
   );
 }
