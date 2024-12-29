@@ -1,9 +1,9 @@
 .prose :is(h1, h2, h3, h4, h5, h6) {
-  color: var(--primaryText);
+  color: var(--text-neutral-emphasis);
 }
 
 .prose a {
-  color: var(--primaryBrand);
+  color: var(--text-brand-primary);
 }
 
 .prose a:hover {
@@ -20,16 +20,16 @@
 
 .prose p {
   margin: 0;
-  color: var(--secondaryText);
+  color: var(--text-neutral-primary);
 }
 
 .prose strong {
-  color: var(--primaryText);
+  color: var(--text-neutral-emphasis);
 }
 
 .prose p > code {
-  color: var(--secondaryText);
-  background-color: var(--secondaryBackground);
+  color: var(--text-neutral-secondary);
+  background-color: var(--bg-neutral-secondary);
   border-radius: 0.375rem;
   padding: 0.25rem 0.375rem;
   font-family: 'Pretendard', sans-serif;
@@ -42,7 +42,7 @@
 }
 
 .prose hr {
-  border-color: var(--tertiaryText);
+  border-color: var(--text-neutral-tertiary);
 }
 
 .prose li {
@@ -55,5 +55,5 @@
 }
 
 .prose li::marker {
-  color: var(--tertiaryText);
+  color: var(--text-neutral-tertiary);
 }
