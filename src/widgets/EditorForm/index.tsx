@@ -5,9 +5,9 @@ import { Editor as EditorType } from '@tiptap/react';
 import { useActionState, useRef } from 'react';
 
 import { TipTapNode } from '@/entities/node';
+import { PostFormState, uploadImage } from '@/entities/post';
 import { Editor } from '@/features/editor';
 import { ScrollableContainer } from '@/shared/layout';
-import { PostFormState } from '@/entities/post';
 
 const initialState = {
   message: '',
@@ -31,12 +31,21 @@ export function EditorForm({ post, action }: Props) {
     contentInputRef.current.value = JSON.stringify(editor.getJSON());
   };
 
+  const onThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !post) return;
+
+    const formData = new FormData();
+    formData.append('file', e.target.files[0]);
+
+    uploadImage(formData, `thumbnail-${post.id}.png`);
+  };
+
   return (
     <form action={formAction}>
       <div className="mb-5 flex justify-between">
         <input
           placeholder="제목을 입력해주세요..."
-          className="bg-neutral-primary border-neutral-tertiary border-b-2 pb-2 text-3xl font-semibold outline-none"
+          className="border-b-2 border-neutral-tertiary bg-neutral-primary pb-2 text-3xl font-semibold outline-none"
           type="text"
           name="title"
           defaultValue={(state.formData.get('title') as string) ?? post?.title}
@@ -61,9 +70,30 @@ export function EditorForm({ post, action }: Props) {
       </ScrollableContainer>
       <div className="flex gap-2">
         <p>{state.message}</p>
-        <button className="bg-neutral-secondary hover:bg-neutral-tertiary rounded-md px-4 py-2">
+        <button className="rounded-md bg-neutral-secondary px-4 py-2 hover:bg-neutral-tertiary">
           추가
         </button>
+        <div className="group relative">
+          <div className="absolute bottom-12 hidden aspect-video w-80 bg-neutral-secondary group-hover:flex">
+            <img
+              width="100%"
+              alt="post thumnail"
+              src={`https://doromo-blog-app.s3.ap-northeast-2.amazonaws.com/thumbnail-${post.id}.png`}
+            />
+          </div>
+          <label
+            htmlFor="thumnail"
+            className="flex h-full items-center justify-center rounded-md bg-neutral-secondary px-3 hover:cursor-pointer hover:bg-neutral-tertiary"
+          >
+            썸네일 업로드
+          </label>
+          <input
+            type="file"
+            id="thumnail"
+            hidden
+            onChange={onThumbnailUpload}
+          ></input>
+        </div>
       </div>
     </form>
   );
