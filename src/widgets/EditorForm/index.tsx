@@ -67,6 +67,20 @@ export function EditorForm({ post, categories, action }: Props) {
         </select>
       </div>
       {post && <input id="id" name="id" defaultValue={post?.id} hidden />}
+      <div className="mb-8 flex flex-col gap-2">
+        <label
+          htmlFor="preview"
+          className="text-xl font-semibold text-neutral-secondary"
+        >
+          Preview
+        </label>
+        <textarea
+          placeholder="프리뷰를 입력해주세요"
+          name="preview"
+          defaultValue={post?.preview || ''}
+          className="min-h-24 w-full border-2 border-neutral-tertiary bg-neutral-primary p-2 outline-none"
+        />
+      </div>
       <input
         id="content"
         name="content"
@@ -77,12 +91,18 @@ export function EditorForm({ post, categories, action }: Props) {
         }
         hidden
       />
-      <ScrollableContainer height="h-[80vh]" maxHeight="max-h-[80vh]">
-        <Editor
-          content={(post?.content as TipTapNode) ?? {}}
-          onEditorUpdate={onEditorUpdate}
-        />
-      </ScrollableContainer>
+      <div className="flex flex-col gap-2">
+        <label className="text-xl font-semibold text-neutral-secondary">
+          Content
+        </label>
+        <ScrollableContainer height="h-[80vh]" maxHeight="max-h-[80vh]">
+          <Editor
+            content={(post?.content as TipTapNode) ?? {}}
+            onEditorUpdate={onEditorUpdate}
+          />
+        </ScrollableContainer>
+      </div>
+
       <div className="flex gap-2">
         <p>{state.message}</p>
         <button className="rounded-md bg-neutral-secondary px-4 py-2 hover:bg-neutral-tertiary">

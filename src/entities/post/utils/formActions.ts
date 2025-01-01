@@ -14,6 +14,7 @@ const createPostSchema = z.object({
   title: z.string().trim().min(1, POST_MESSAGE.ERROR.TITLE_REQUIRED),
   content: z.string().trim().min(1, POST_MESSAGE.ERROR.CONTENT_REQUIRED),
   categoryId: z.string().trim().min(1, POST_MESSAGE.ERROR.CATEGORY_REQUIRED),
+  preview: z.string(),
 });
 
 export const createPostAction = async (
@@ -24,6 +25,7 @@ export const createPostAction = async (
     title: formData.get('title'),
     content: formData.get('content'),
     categoryId: formData.get('categoryId'),
+    preview: formData.get('preview'),
   });
 
   if (!validatedBody.success) {
@@ -39,6 +41,7 @@ export const createPostAction = async (
         title: validatedBody.data.title,
         content: JSON.parse(validatedBody.data.content),
         categoryId: Number(validatedBody.data.categoryId),
+        preview: validatedBody.data.preview,
       },
     });
   } catch (e) {
@@ -54,6 +57,7 @@ const updatePostSchema = z.object({
   title: z.string().min(1, POST_MESSAGE.ERROR.TITLE_REQUIRED),
   categoryId: z.string().min(1, POST_MESSAGE.ERROR.CATEGORY_REQUIRED),
   content: z.string().min(1, POST_MESSAGE.ERROR.CONTENT_REQUIRED),
+  preview: z.string(),
 });
 
 export const updatePostAction = async (
@@ -65,6 +69,7 @@ export const updatePostAction = async (
     title: formData.get('title'),
     categoryId: formData.get('categoryId'),
     content: formData.get('content'),
+    preview: formData.get('preview'),
   });
 
   if (!validatedBody.success) {
@@ -84,6 +89,7 @@ export const updatePostAction = async (
         content: JSON.parse(validatedBody.data.content),
         categoryId: Number(validatedBody.data.categoryId),
         updatedAt: new Date(),
+        preview: validatedBody.data.preview,
       },
     });
   } catch (e) {
