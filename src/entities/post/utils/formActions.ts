@@ -13,6 +13,7 @@ const prisma = new PrismaClient();
 const createPostSchema = z.object({
   title: z.string().trim().min(1, POST_MESSAGE.ERROR.TITLE_REQUIRED),
   content: z.string().trim().min(1, POST_MESSAGE.ERROR.CONTENT_REQUIRED),
+  categoryId: z.string().trim().min(1, POST_MESSAGE.ERROR.CATEGORY_REQUIRED),
 });
 
 export const createPostAction = async (
@@ -22,7 +23,7 @@ export const createPostAction = async (
   const validatedBody = createPostSchema.safeParse({
     title: formData.get('title'),
     content: formData.get('content'),
-    category: formData.get('category'),
+    categoryId: formData.get('categoryId'),
   });
 
   if (!validatedBody.success) {
@@ -37,6 +38,7 @@ export const createPostAction = async (
       data: {
         title: validatedBody.data.title,
         content: JSON.parse(validatedBody.data.content),
+        categoryId: Number(validatedBody.data.categoryId),
       },
     });
   } catch (e) {
@@ -50,6 +52,7 @@ export const createPostAction = async (
 const updatePostSchema = z.object({
   id: z.number(),
   title: z.string().min(1, POST_MESSAGE.ERROR.TITLE_REQUIRED),
+  categoryId: z.string().min(1, POST_MESSAGE.ERROR.CATEGORY_REQUIRED),
   content: z.string().min(1, POST_MESSAGE.ERROR.CONTENT_REQUIRED),
 });
 
@@ -60,6 +63,7 @@ export const updatePostAction = async (
   const validatedBody = updatePostSchema.safeParse({
     id: Number(formData.get('id')),
     title: formData.get('title'),
+    categoryId: formData.get('categoryId'),
     content: formData.get('content'),
   });
 
@@ -78,6 +82,7 @@ export const updatePostAction = async (
       data: {
         title: validatedBody.data.title,
         content: JSON.parse(validatedBody.data.content),
+        categoryId: Number(validatedBody.data.categoryId),
         updatedAt: new Date(),
       },
     });

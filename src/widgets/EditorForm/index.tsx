@@ -1,6 +1,6 @@
 'use client';
 
-import { Post } from '@prisma/client';
+import { Category, Post } from '@prisma/client';
 import { Editor as EditorType } from '@tiptap/react';
 import { useActionState, useRef } from 'react';
 
@@ -16,13 +16,14 @@ const initialState = {
 
 type Props = {
   post?: Post;
+  categories: Category[];
   action: (
     prevState: PostFormState,
     formData: FormData,
   ) => Promise<PostFormState>;
 };
 
-export function EditorForm({ post, action }: Props) {
+export function EditorForm({ post, categories, action }: Props) {
   const [state, formAction] = useActionState(action, initialState);
   const contentInputRef = useRef<HTMLInputElement>(null);
 
@@ -42,7 +43,7 @@ export function EditorForm({ post, action }: Props) {
 
   return (
     <form action={formAction}>
-      <div className="mb-5 flex justify-between">
+      <div className="mb-5 flex items-end justify-between">
         <input
           placeholder="제목을 입력해주세요..."
           className="border-b-2 border-neutral-tertiary bg-neutral-primary pb-2 text-3xl font-semibold outline-none"
@@ -50,8 +51,22 @@ export function EditorForm({ post, action }: Props) {
           name="title"
           defaultValue={(state.formData.get('title') as string) ?? post?.title}
         />
+        <select
+          name="categoryId"
+          className="w-24 rounded-md border-[1px] border-neutral-primary bg-neutral-primary px-2 py-2 outline-none"
+        >
+          {categories.map((category) => (
+            <option
+              className="border-neutral-primary hover:cursor-pointer"
+              key={category.id}
+              value={category.id}
+            >
+              {category.name}
+            </option>
+          ))}
+        </select>
       </div>
-      <input id="id" name="id" defaultValue={post?.id} hidden />
+      {post && <input id="id" name="id" defaultValue={post?.id} hidden />}
       <input
         id="content"
         name="content"
@@ -73,27 +88,29 @@ export function EditorForm({ post, action }: Props) {
         <button className="rounded-md bg-neutral-secondary px-4 py-2 hover:bg-neutral-tertiary">
           추가
         </button>
-        <div className="group relative">
-          <div className="absolute bottom-12 hidden aspect-video w-80 bg-neutral-secondary group-hover:flex">
-            <img
-              width="100%"
-              alt="post thumnail"
-              src={`https://doromo-blog-app.s3.ap-northeast-2.amazonaws.com/thumbnail-${post.id}.png`}
-            />
+        {post?.id && (
+          <div className="group relative">
+            <div className="absolute bottom-12 hidden aspect-video w-80 bg-neutral-secondary group-hover:flex">
+              <img
+                width="100%"
+                alt="post thumnail"
+                src={`https://doromo-blog-app.s3.ap-northeast-2.amazonaws.com/thumbnail-${post.id}.png`}
+              />
+            </div>
+            <label
+              htmlFor="thumnail"
+              className="flex h-full items-center justify-center rounded-md bg-neutral-secondary px-3 hover:cursor-pointer hover:bg-neutral-tertiary"
+            >
+              썸네일 업로드
+            </label>
+            <input
+              type="file"
+              id="thumnail"
+              hidden
+              onChange={onThumbnailUpload}
+            ></input>
           </div>
-          <label
-            htmlFor="thumnail"
-            className="flex h-full items-center justify-center rounded-md bg-neutral-secondary px-3 hover:cursor-pointer hover:bg-neutral-tertiary"
-          >
-            썸네일 업로드
-          </label>
-          <input
-            type="file"
-            id="thumnail"
-            hidden
-            onChange={onThumbnailUpload}
-          ></input>
-        </div>
+        )}
       </div>
     </form>
   );
