@@ -90,7 +90,7 @@ export const updatePostAction = async (
   redirect(`/post/${addDashes(encodeURI(validatedBody.data.title))}`);
 };
 
-export const uploadImage = async (formData: FormData) => {
+export const uploadImage = async (formData: FormData, fileName?: string) => {
   const files = formData.getAll('file') as File[];
   const urls: string[] = [];
 
@@ -99,7 +99,7 @@ export const uploadImage = async (formData: FormData) => {
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
-      const key = `${file.lastModified}-${file.name}`;
+      const key = fileName || `${file.lastModified}-${file.name}`;
 
       const command = new PutObjectCommand({
         Bucket: process.env.MY_AWS_S3_BUCKET as string,
