@@ -10,6 +10,7 @@ const fetchPost = async (title: string) => {
     select: {
       id: true,
       title: true,
+      category: true,
       content: true,
       createdAt: true,
       updatedAt: true,
