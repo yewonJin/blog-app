@@ -1,7 +1,4 @@
 export { type PostFormState } from './models/postTypes';
 
-export {
-  createPostAction,
-  updatePostAction,
-  uploadImage,
-} from './utils/actions';
+export { createPostAction, updatePostAction } from './utils/formActions';
+export { uploadImage } from './utils/actions';

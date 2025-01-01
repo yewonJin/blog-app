@@ -2,10 +2,10 @@
 
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
 
 import { CATEGORY_MESSAGE } from '../configs/messages';
 import { CategoryFormState } from '../models/categoryTypes';
-import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 

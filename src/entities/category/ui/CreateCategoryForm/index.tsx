@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react';
 
-import { createCategoryAction } from '../../utils/action';
+import { createCategoryAction } from '../../utils/formActions';
 
 const initialState = {
   success: false,

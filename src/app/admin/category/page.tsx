@@ -1,20 +1,11 @@
-import { PrismaClient } from '@prisma/client';
-
-import { CreateCategoryForm, UpdateCategoryForm } from '@/entities/category';
-
-const prisma = new PrismaClient();
-
-const fetchCategories = async () => {
-  return await prisma.category.findMany({
-    select: {
-      id: true,
-      name: true,
-    },
-  });
-};
+import {
+  getCategories,
+  CreateCategoryForm,
+  UpdateCategoryForm,
+} from '@/entities/category';
 
 export default async function Page() {
-  const categories = await fetchCategories();
+  const categories = await getCategories();
 
   return (
     <div className="flex flex-col gap-4">

@@ -4,7 +4,7 @@ import { useActionState, useEffect, useState } from 'react';
 import { Category } from '@prisma/client';
 
 import { UpdateCategoryItem } from '../UpdateCategoryItem';
-import { updateCategoryAction } from '../../utils/action';
+import { updateCategoryAction } from '../../utils/formActions';
 
 type Props = {
   categories: Category[];
