@@ -14,6 +14,7 @@ const fetchPost = async (title: string) => {
       content: true,
       createdAt: true,
       updatedAt: true,
+      preview: true,
     },
     where: {
       title,
