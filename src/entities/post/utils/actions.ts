@@ -1,3 +1,5 @@
+'use server';
+
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 
 import { s3, S3_URL } from './aws';
