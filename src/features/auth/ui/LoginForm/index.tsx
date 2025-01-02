@@ -14,7 +14,7 @@ export function LoginForm() {
   return (
     <form
       action={formAction}
-      className="bg-neutral-secondary mx-auto mt-16 w-[500px] p-16"
+      className="mx-auto w-[500px] bg-neutral-secondary p-16"
     >
       <h1 className="text-3xl font-semibold">로그인 페이지</h1>
       <div className="mt-8 flex flex-col gap-2">
@@ -23,7 +23,7 @@ export function LoginForm() {
           id="id"
           name="id"
           type="text"
-          className="bg-neutral-primary rounded-md p-3 outline-none"
+          className="rounded-md bg-neutral-primary p-3 outline-none"
         />
       </div>
       <div className="mt-4 flex flex-col gap-2">
@@ -32,11 +32,11 @@ export function LoginForm() {
           id="password"
           name="password"
           type="password"
-          className="bg-neutral-primary rounded-md p-3 outline-none"
+          className="rounded-md bg-neutral-primary p-3 outline-none"
         />
       </div>
       <p className="my-3 h-6">{state.message}</p>
-      <button className="bg-neutral-tertiary w-full rounded-md py-3">
+      <button className="w-full rounded-md bg-neutral-tertiary py-3">
         로그인
       </button>
     </form>

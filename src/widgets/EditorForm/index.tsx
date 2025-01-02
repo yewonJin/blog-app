@@ -95,7 +95,7 @@ export function EditorForm({ post, categories, action }: Props) {
         <label className="text-xl font-semibold text-neutral-secondary">
           Content
         </label>
-        <ScrollableContainer height="h-[80vh]" maxHeight="max-h-[80vh]">
+        <ScrollableContainer height="h-[60vh]" maxHeight="max-h-[60vh]">
           <Editor
             content={(post?.content as TipTapNode) ?? {}}
             onEditorUpdate={onEditorUpdate}
