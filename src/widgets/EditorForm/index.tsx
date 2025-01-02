@@ -69,15 +69,32 @@ export function EditorForm({ post, categories, action }: Props) {
       {post && <input id="id" name="id" defaultValue={post?.id} hidden />}
       <div className="mb-8 flex flex-col gap-2">
         <label
+          htmlFor="slug"
+          className="text-xl font-semibold text-neutral-secondary"
+        >
+          Slug
+        </label>
+        <input
+          placeholder="슬러그를 입력해주세요.."
+          className="border-2 border-neutral-tertiary bg-neutral-primary p-2 outline-none"
+          type="text"
+          name="slug"
+          defaultValue={(state.formData.get('slug') as string) ?? post?.slug}
+        />
+      </div>
+      <div className="mb-8 flex flex-col gap-2">
+        <label
           htmlFor="preview"
           className="text-xl font-semibold text-neutral-secondary"
         >
           Preview
         </label>
         <textarea
-          placeholder="프리뷰를 입력해주세요"
+          placeholder="프리뷰를 입력해주세요.."
           name="preview"
-          defaultValue={post?.preview || ''}
+          defaultValue={
+            (state.formData.get('preview') as string) ?? post?.preview
+          }
           className="min-h-24 w-full border-2 border-neutral-tertiary bg-neutral-primary p-2 outline-none"
         />
       </div>
@@ -103,7 +120,7 @@ export function EditorForm({ post, categories, action }: Props) {
         </ScrollableContainer>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex items-center gap-2">
         <p>{state.message}</p>
         <button className="rounded-md bg-neutral-secondary px-4 py-2 hover:bg-neutral-tertiary">
           추가
@@ -119,7 +136,7 @@ export function EditorForm({ post, categories, action }: Props) {
             </div>
             <label
               htmlFor="thumnail"
-              className="flex h-full items-center justify-center rounded-md bg-neutral-secondary px-3 hover:cursor-pointer hover:bg-neutral-tertiary"
+              className="flex h-full items-center justify-center rounded-md bg-neutral-secondary px-3 py-2 hover:cursor-pointer hover:bg-neutral-tertiary"
             >
               썸네일 업로드
             </label>

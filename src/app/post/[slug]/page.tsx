@@ -1,12 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 
 import PostDetail from '@/widgets/PostDetail';
-import { removeDashes } from '@/shared/utils';
 
 const prisma = new PrismaClient();
 
-const fetchPost = async (title: string) => {
-  return await prisma.post.findMany({
+const fetchPost = async (slug: string) => {
+  return await prisma.post.findUnique({
+    where: {
+      slug,
+    },
     select: {
       id: true,
       title: true,
@@ -15,26 +17,25 @@ const fetchPost = async (title: string) => {
       createdAt: true,
       updatedAt: true,
       preview: true,
-    },
-    where: {
-      title,
+      slug: true,
     },
   });
 };
 
 export async function generateStaticParams() {
   const posts = await prisma.post.findMany();
-
-  return posts.map((post) => ({ title: post.title }));
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ title: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { title } = await params;
-  const post = await fetchPost(removeDashes(decodeURI(title)));
+  const { slug } = await params;
+  const post = await fetchPost(decodeURI(slug));
 
-  return <PostDetail post={post[0]} />;
+  if (!post) return <div>해당 게시글을 찾을 수 없습니다.</div>;
+
+  return <PostDetail post={post} />;
 }

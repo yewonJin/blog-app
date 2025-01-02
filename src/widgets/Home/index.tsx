@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
-import { addDashes, getRelativeTime } from '@/shared/utils';
 import { Category, Post } from '@prisma/client';
+
+import { getRelativeTime } from '@/shared/utils';
 import { Divider } from '@/shared/ui';
 
 type Props = {
@@ -16,7 +16,7 @@ export function Home({ posts }: Props) {
     <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 xl:grid-cols-3">
       {posts.map((post) => (
         <Link
-          href={`/post/${addDashes(post.title)}`}
+          href={`/post/${post.slug}`}
           key={post.title}
           className="bg-neutral-secondary"
         >

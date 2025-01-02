@@ -12,6 +12,7 @@ const fetchPosts = async () => {
       preview: true,
       id: true,
       updatedAt: true,
+      slug: true,
     },
   });
 };
