@@ -1,28 +1,14 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
-import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 import { PostFormState } from '../models/postTypes';
 import { POST_MESSAGE } from '../configs/messages';
+import { createPostSchema, updatePostSchema } from './zod';
 
 const prisma = new PrismaClient();
-
-const slugRegex = /^[a-z0-9가-힣]+(?:-[a-z0-9가-힣]+)*$/;
-
-const createPostSchema = z.object({
-  title: z.string().trim().min(1, POST_MESSAGE.ERROR.TITLE_REQUIRED),
-  content: z.string().trim().min(1, POST_MESSAGE.ERROR.CONTENT_REQUIRED),
-  categoryId: z.string().trim().min(1, POST_MESSAGE.ERROR.CATEGORY_REQUIRED),
-  preview: z.string(),
-  slug: z
-    .string()
-    .min(3, POST_MESSAGE.ERROR.SLUG_MIN_LENGTH)
-    .max(30, POST_MESSAGE.ERROR.SLUG_MAX_LENGTH)
-    .regex(slugRegex, POST_MESSAGE.ERROR.SLUG_INVALID_FORMAT),
-});
 
 export const createPostAction = async (
   prevState: PostFormState,
@@ -61,19 +47,6 @@ export const createPostAction = async (
   revalidatePath('/post', 'page');
   redirect(`/post/${encodeURIComponent(validatedBody.data.slug)}`);
 };
-
-const updatePostSchema = z.object({
-  id: z.number(),
-  title: z.string().min(1, POST_MESSAGE.ERROR.TITLE_REQUIRED),
-  categoryId: z.string().min(1, POST_MESSAGE.ERROR.CATEGORY_REQUIRED),
-  content: z.string().min(1, POST_MESSAGE.ERROR.CONTENT_REQUIRED),
-  preview: z.string(),
-  slug: z
-    .string()
-    .min(3, POST_MESSAGE.ERROR.SLUG_MIN_LENGTH)
-    .max(30, POST_MESSAGE.ERROR.SLUG_MAX_LENGTH)
-    .regex(slugRegex, POST_MESSAGE.ERROR.SLUG_INVALID_FORMAT),
-});
 
 export const updatePostAction = async (
   prevState: { message: string },
