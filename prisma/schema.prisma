@@ -12,6 +12,7 @@ model Post {
   title       String    @unique
   content     Json
   preview     String?
+  slug        String    @unique
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   categoryId  Int
