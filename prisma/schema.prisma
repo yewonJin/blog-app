@@ -11,6 +11,7 @@ model Post {
   id          Int       @id @default(autoincrement())
   title       String    @unique
   content     Json
+  preview     String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   categoryId  Int

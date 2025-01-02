@@ -20,7 +20,7 @@ export function Editor({ content, onEditorUpdate }: EditorProps) {
     content,
     editorProps: {
       attributes: {
-        class: 'prose prose-lg focus:outline-none !max-w-none',
+        class: 'prose prose-lg focus:outline-none !max-w-none border-2 p-2',
       },
       handleDrop: (view, event, slice, moved) => {
         if (!moved && event.dataTransfer && event.dataTransfer.files) {
