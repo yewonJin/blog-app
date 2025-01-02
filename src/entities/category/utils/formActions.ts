@@ -1,17 +1,13 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
-import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 
 import { CATEGORY_MESSAGE } from '../configs/messages';
 import { CategoryFormState } from '../models/categoryTypes';
+import { createCategorySchema, updateCategorySchema } from './zod';
 
 const prisma = new PrismaClient();
-
-const createCategorySchema = z.object({
-  name: z.string().trim().min(1, CATEGORY_MESSAGE.ERROR.NAME_REQUIRED),
-});
 
 export const createCategoryAction = async (
   prevState: CategoryFormState,
@@ -49,11 +45,6 @@ export const createCategoryAction = async (
     };
   }
 };
-
-const updateCategorySchema = z.object({
-  name: z.string().trim().min(1, CATEGORY_MESSAGE.ERROR.NAME_REQUIRED),
-  categoryId: z.string().trim().min(1, CATEGORY_MESSAGE.ERROR.ID_REQUIRED),
-});
 
 export const updateCategoryAction = async (
   prevState: CategoryFormState,

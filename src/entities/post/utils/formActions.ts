@@ -1,21 +1,14 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
-import { z } from 'zod';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 import { PostFormState } from '../models/postTypes';
 import { POST_MESSAGE } from '../configs/messages';
-import { addDashes } from '@/shared/utils';
+import { createPostSchema, updatePostSchema } from './zod';
 
 const prisma = new PrismaClient();
-
-const createPostSchema = z.object({
-  title: z.string().trim().min(1, POST_MESSAGE.ERROR.TITLE_REQUIRED),
-  content: z.string().trim().min(1, POST_MESSAGE.ERROR.CONTENT_REQUIRED),
-  categoryId: z.string().trim().min(1, POST_MESSAGE.ERROR.CATEGORY_REQUIRED),
-  preview: z.string(),
-});
 
 export const createPostAction = async (
   prevState: PostFormState,
@@ -26,6 +19,7 @@ export const createPostAction = async (
     content: formData.get('content'),
     categoryId: formData.get('categoryId'),
     preview: formData.get('preview'),
+    slug: formData.get('slug'),
   });
 
   if (!validatedBody.success) {
@@ -41,6 +35,7 @@ export const createPostAction = async (
         title: validatedBody.data.title,
         content: JSON.parse(validatedBody.data.content),
         categoryId: Number(validatedBody.data.categoryId),
+        slug: validatedBody.data.slug,
         preview: validatedBody.data.preview,
       },
     });
@@ -49,16 +44,9 @@ export const createPostAction = async (
     return { message: POST_MESSAGE.ERROR.CREATE_FAILED, formData };
   }
 
-  redirect(`/post/${addDashes(encodeURI(validatedBody.data.title))}`);
+  revalidatePath('/post', 'page');
+  redirect(`/post/${encodeURIComponent(validatedBody.data.slug)}`);
 };
-
-const updatePostSchema = z.object({
-  id: z.number(),
-  title: z.string().min(1, POST_MESSAGE.ERROR.TITLE_REQUIRED),
-  categoryId: z.string().min(1, POST_MESSAGE.ERROR.CATEGORY_REQUIRED),
-  content: z.string().min(1, POST_MESSAGE.ERROR.CONTENT_REQUIRED),
-  preview: z.string(),
-});
 
 export const updatePostAction = async (
   prevState: { message: string },
@@ -70,6 +58,7 @@ export const updatePostAction = async (
     categoryId: formData.get('categoryId'),
     content: formData.get('content'),
     preview: formData.get('preview'),
+    slug: formData.get('slug'),
   });
 
   if (!validatedBody.success) {
@@ -90,6 +79,7 @@ export const updatePostAction = async (
         categoryId: Number(validatedBody.data.categoryId),
         updatedAt: new Date(),
         preview: validatedBody.data.preview,
+        slug: validatedBody.data.slug,
       },
     });
   } catch (e) {
@@ -97,5 +87,6 @@ export const updatePostAction = async (
     return { message: POST_MESSAGE.ERROR.UPDATE_FAILED, formData };
   }
 
-  redirect(`/post/${addDashes(encodeURI(validatedBody.data.title))}`);
+  revalidatePath('/post', 'page');
+  redirect(`/post/${encodeURIComponent(validatedBody.data.slug)}`);
 };

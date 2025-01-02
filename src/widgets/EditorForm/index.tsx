@@ -8,6 +8,7 @@ import { TipTapNode } from '@/entities/node';
 import { PostFormState, uploadImage } from '@/entities/post';
 import { Editor } from '@/features/editor';
 import { ScrollableContainer } from '@/shared/layout';
+import { FormField, InputField } from '@/shared/ui';
 
 const initialState = {
   message: '',
@@ -44,14 +45,23 @@ export function EditorForm({ post, categories, action }: Props) {
   return (
     <form action={formAction}>
       <div className="mb-5 flex items-end justify-between">
-        <input
-          placeholder="제목을 입력해주세요..."
-          className="border-b-2 border-neutral-tertiary bg-neutral-primary pb-2 text-3xl font-semibold outline-none"
-          type="text"
-          name="title"
-          defaultValue={(state.formData.get('title') as string) ?? post?.title}
-        />
+        <FormField name="title" className="mb-0">
+          <InputField
+            id="title"
+            name="title"
+            placeholder="제목을 입력해주세요..."
+            defaultValue={
+              (state.formData.get('title') as string) ?? post?.title
+            }
+            className="border-x-0 border-b-2 border-t-0 p-0 pb-2 text-3xl font-semibold"
+          />
+        </FormField>
         <select
+          defaultValue={
+            Number(
+              (state.formData.get('categoryId') as string) ?? post?.categoryId,
+            ) || ''
+          }
           name="categoryId"
           className="w-24 rounded-md border-[1px] border-neutral-primary bg-neutral-primary px-2 py-2 outline-none"
         >
@@ -66,44 +76,45 @@ export function EditorForm({ post, categories, action }: Props) {
           ))}
         </select>
       </div>
-      {post && <input id="id" name="id" defaultValue={post?.id} hidden />}
-      <div className="mb-8 flex flex-col gap-2">
-        <label
-          htmlFor="preview"
-          className="text-xl font-semibold text-neutral-secondary"
-        >
-          Preview
-        </label>
+      {post && <InputField name="id" defaultValue={post?.id} hidden />}
+      <FormField name="slug" label="Slug">
+        <InputField
+          id="slug"
+          name="slug"
+          defaultValue={(state.formData.get('slug') as string) ?? post?.slug}
+          placeholder="슬러그를 입력해주세요..."
+        />
+      </FormField>
+      <FormField name="preview" label="Preview">
         <textarea
-          placeholder="프리뷰를 입력해주세요"
+          id="preview"
+          placeholder="프리뷰를 입력해주세요.."
           name="preview"
-          defaultValue={post?.preview || ''}
+          defaultValue={
+            (state.formData.get('preview') as string) ?? post?.preview
+          }
           className="min-h-24 w-full border-2 border-neutral-tertiary bg-neutral-primary p-2 outline-none"
         />
-      </div>
-      <input
-        id="content"
-        name="content"
-        ref={contentInputRef}
-        defaultValue={
-          (state.formData.get('content') as string) ??
-          JSON.stringify(post?.content)
-        }
-        hidden
-      />
-      <div className="flex flex-col gap-2">
-        <label className="text-xl font-semibold text-neutral-secondary">
-          Content
-        </label>
+      </FormField>
+      <FormField name="content" label="Content">
+        <InputField
+          id="content"
+          name="content"
+          ref={contentInputRef}
+          defaultValue={
+            (state.formData.get('content') as string) ??
+            JSON.stringify(post?.content)
+          }
+          hidden
+        />
         <ScrollableContainer height="h-[60vh]" maxHeight="max-h-[60vh]">
           <Editor
             content={(post?.content as TipTapNode) ?? {}}
             onEditorUpdate={onEditorUpdate}
           />
         </ScrollableContainer>
-      </div>
-
-      <div className="flex gap-2">
+      </FormField>
+      <div className="flex items-center gap-2">
         <p>{state.message}</p>
         <button className="rounded-md bg-neutral-secondary px-4 py-2 hover:bg-neutral-tertiary">
           추가
@@ -119,7 +130,7 @@ export function EditorForm({ post, categories, action }: Props) {
             </div>
             <label
               htmlFor="thumnail"
-              className="flex h-full items-center justify-center rounded-md bg-neutral-secondary px-3 hover:cursor-pointer hover:bg-neutral-tertiary"
+              className="flex h-full items-center justify-center rounded-md bg-neutral-secondary px-3 py-2 hover:cursor-pointer hover:bg-neutral-tertiary"
             >
               썸네일 업로드
             </label>
