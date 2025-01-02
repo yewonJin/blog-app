@@ -49,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${pretendard.className} ${pretendard.variable} ${jetBrainsMono.variable}`}
+        className={`${pretendard.className} ${pretendard.variable} ${jetBrainsMono.variable} mx-auto max-w-[1200px] px-4 xl:px-0`}
       >
         <script
           dangerouslySetInnerHTML={{ __html: setInitialThemeMode }}

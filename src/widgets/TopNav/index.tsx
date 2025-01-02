@@ -4,8 +4,8 @@ import { ThemeToggle } from '@/features/theme/ui/ThemeToggle';
 
 export default function TopNav() {
   return (
-    <nav className="flex h-20 w-full items-center justify-between px-6">
-      <Link href="/" className="text-neutral-emphasis text-2xl font-bold">
+    <nav className="mb-12 flex h-20 w-full items-center justify-between">
+      <Link href="/" className="text-2xl font-bold text-neutral-emphasis">
         DLOG
       </Link>
       <div className="">
