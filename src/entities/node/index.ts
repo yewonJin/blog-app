@@ -11,3 +11,5 @@ export {
   type CodeBlockNode,
   type ImageNode,
 } from './models/interface';
+
+export { generateHeadingIds } from './utils/headingUtils';

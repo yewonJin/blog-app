@@ -1,5 +1,16 @@
 .prose :is(h1, h2, h3, h4, h5, h6) {
   color: var(--text-neutral-emphasis);
+  scroll-margin-top: 32px;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) > a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) > a:hover {
+  color: var(--text-brand-primary);
 }
 
 .prose a {
@@ -8,10 +19,6 @@
 
 .prose a:hover {
   cursor: pointer;
-}
-
-.prose :is(h2, h3, h4, h5, h6) {
-  font-weight: 600;
 }
 
 .prose h1 {
