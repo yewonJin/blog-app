@@ -72,6 +72,7 @@ export const nodeHandlers: TipTapNodeHandlers = {
   blockquote: (props) => (
     <blockquote key={uuidv4()}>{props.children}</blockquote>
   ),
+  hardBreak: () => <br key={uuidv4()} className="ProseMirror-trailingBreak" />,
   image: (props) => (
     <Image
       key={uuidv4()}

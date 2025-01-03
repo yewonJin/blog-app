@@ -13,6 +13,7 @@ export type TipTapNodeHandlers = {
   codeBlock: TipTapNodeHandler<CodeBlockNode>;
   horizontalRule: TipTapNodeHandler;
   image: TipTapNodeHandler<ImageNode>;
+  hardBreak: TipTapNodeHandler;
 };
 
 export type TipTapMarkHandlers = {
@@ -60,6 +61,7 @@ export interface TextNode extends TipTapNode {
 export interface HeadingNode extends TipTapNode {
   type: 'heading';
   attrs: {
+    id: string;
     level: 1 | 2 | 3 | 4 | 5 | 6;
   };
 }
