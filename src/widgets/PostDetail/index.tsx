@@ -1,6 +1,9 @@
-import { Category, Post } from '@prisma/client';
+'use client';
 
-import { TipTapNode, generateHeadingIds } from '@/entities/node';
+import { Category, Post } from '@prisma/client';
+import { useCallback, useMemo, useState } from 'react';
+
+import { generateHeadingIds, TipTapNode } from '@/entities/node';
 import { TiptapViewer, TableOfContents } from '@/features/viewer';
 import { DateDisplay, Divider } from '@/shared/ui';
 
@@ -11,7 +14,25 @@ type Props = {
 };
 
 export default function PostDetail({ post }: Props) {
-  const indexedNode = generateHeadingIds(post.content as TipTapNode);
+  const [offsetTops, setOffsetTops] = useState<number[]>([]);
+
+  const indexedNode = useMemo(() => {
+    return generateHeadingIds(post.content as TipTapNode);
+  }, [post]);
+
+  const ref = useCallback((node: HTMLDivElement) => {
+    if (node !== null) {
+      const headings = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+
+      setOffsetTops(
+        Array.from(node.children[0].children)
+          .filter((node): node is HTMLElement =>
+            headings.includes(node.nodeName),
+          )
+          .map((node) => node.offsetTop),
+      );
+    }
+  }, []);
 
   return (
     <div className="mx-auto flex w-full justify-center gap-12">
@@ -24,10 +45,12 @@ export default function PostDetail({ post }: Props) {
           <DateDisplay date={new Date(post.updatedAt)} />
         </div>
         <Divider direction="horizontal" className="w-full" />
-        <TiptapViewer node={indexedNode as TipTapNode} />
+        <div ref={ref}>
+          <TiptapViewer node={indexedNode} />
+        </div>
       </div>
       <div className="hidden w-[250px] xl:block">
-        <TableOfContents node={indexedNode} />
+        <TableOfContents node={indexedNode} offsetTops={offsetTops} />
       </div>
     </div>
   );
