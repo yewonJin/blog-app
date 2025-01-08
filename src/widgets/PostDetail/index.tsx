@@ -1,9 +1,9 @@
 'use client';
 
 import { Category, Post } from '@prisma/client';
-import { useCallback, useMemo, useState } from 'react';
+import { Suspense, useCallback, useState } from 'react';
 
-import { generateHeadingIds, TipTapNode } from '@/entities/node';
+import { TipTapNode } from '@/entities/node';
 import { TiptapViewer, TableOfContents } from '@/features/viewer';
 import { DateDisplay, Divider } from '@/shared/ui';
 
@@ -11,14 +11,11 @@ type Props = {
   post: Omit<Post, 'categoryId'> & {
     category: Category;
   };
+  indexedNode: TipTapNode;
 };
 
-export default function PostDetail({ post }: Props) {
+export default function PostDetail({ post, indexedNode }: Props) {
   const [offsetTops, setOffsetTops] = useState<number[]>([]);
-
-  const indexedNode = useMemo(() => {
-    return generateHeadingIds(post.content as TipTapNode);
-  }, [post]);
 
   const ref = useCallback((node: HTMLDivElement) => {
     if (node !== null) {
@@ -42,11 +39,17 @@ export default function PostDetail({ post }: Props) {
           <h1 className="text-4xl font-bold text-neutral-emphasis">
             {post.title}
           </h1>
-          <DateDisplay date={new Date(post.updatedAt)} />
+          <Suspense>
+            <DateDisplay date={post.updatedAt} />
+          </Suspense>
         </div>
-        <Divider direction="horizontal" className="w-full" />
+        <Suspense>
+          <Divider direction="horizontal" className="w-full" />
+        </Suspense>
         <div ref={ref}>
-          <TiptapViewer node={indexedNode} />
+          <Suspense>
+            <TiptapViewer node={indexedNode} />
+          </Suspense>
         </div>
       </div>
       <div className="hidden w-[250px] xl:block">

@@ -42,14 +42,7 @@ export function TableOfContents({ node, offsetTops }: Props) {
 
   return (
     <div className="fixed pt-12">
-      <h2
-        className="mb-4 text-xl font-semibold"
-        onClick={() => {
-          setHighlightedIndex((prev) => prev + 1);
-        }}
-      >
-        목차
-      </h2>
+      <h2 className="mb-4 text-xl font-semibold">목차</h2>
       <div className="flex flex-col gap-3">
         {node.content
           .filter((node): node is HeadingNode => node.type === 'heading')
