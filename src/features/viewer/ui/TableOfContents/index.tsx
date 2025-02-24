@@ -41,9 +41,21 @@ export function TableOfContents({ node, offsetTops }: Props) {
   if (!node.content) return null;
 
   return (
-    <div className="fixed pt-12">
-      <h2 className="mb-4 text-xl font-semibold">목차</h2>
-      <div className="flex flex-col gap-3">
+    <div className="fixed mt-4 border-l-[1px] border-neutral-secondary pl-4">
+      <div
+        className={cn(
+          'absolute -left-[1px] h-6 w-[2px] rounded-sm bg-brand-primary duration-200',
+          highlightedIndex === -1 ? 'opacity-0' : 'opacity-100',
+        )}
+        style={{
+          transform:
+            highlightedIndex !== -1
+              ? `translateY(${highlightedIndex * (20 + 12) + 42}px)`
+              : '',
+        }}
+      ></div>
+      <h2 className="mb-4 text-lg font-semibold">목차</h2>
+      <div className="flex flex-col gap-3 text-sm">
         {node.content
           .filter((node): node is HeadingNode => node.type === 'heading')
           .map((heading, index) => (
@@ -52,7 +64,7 @@ export function TableOfContents({ node, offsetTops }: Props) {
                 'text-neutral-tertiary',
                 headingPaddings[heading.attrs.level],
                 index === highlightedIndex
-                  ? 'text-brand-primary'
+                  ? 'text-neutral-primary'
                   : 'hover:text-neutral-secondary',
               )}
               key={heading.attrs.id}
