@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
+import { useHeadingHighlight } from '../../models/useHeadingHighlight';
 import { HeadingNode, TipTapNode } from '@/entities/node';
 import { cn } from '@/shared/utils';
 
@@ -10,33 +9,17 @@ type Props = {
   offsetTops: number[];
 };
 
+const headingPaddings: { [key in HeadingNode['attrs']['id']]: string } = {
+  1: '',
+  2: '',
+  3: 'pl-3',
+  4: 'pl-5',
+  5: 'pl-7',
+  6: 'pl-9',
+};
+
 export function TableOfContents({ node, offsetTops }: Props) {
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
-
-  const onScroll = (offsets: number[]) => {
-    setHighlightedIndex(
-      offsets.filter((item) => item <= window.scrollY).length,
-    );
-  };
-
-  useEffect(() => {
-    if (!offsetTops) return;
-
-    const handleScroll = () => onScroll(offsetTops);
-    handleScroll();
-
-    document.addEventListener('scroll', handleScroll);
-    return () => document.removeEventListener('scroll', handleScroll);
-  }, [offsetTops]);
-
-  const headingPaddings: { [key in HeadingNode['attrs']['id']]: string } = {
-    1: '',
-    2: '',
-    3: 'pl-3',
-    4: 'pl-5',
-    5: 'pl-7',
-    6: 'pl-9',
-  };
+  const { highlightedIndex } = useHeadingHighlight(offsetTops);
 
   if (!node.content) return null;
 
