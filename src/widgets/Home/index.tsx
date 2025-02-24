@@ -13,7 +13,7 @@ type Props = {
 
 export function Home({ posts }: Props) {
   return (
-    <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-12 sm:grid-cols-2 xl:grid-cols-3">
       {posts.map((post) => (
         <Link
           href={`/post/${post.slug}`}

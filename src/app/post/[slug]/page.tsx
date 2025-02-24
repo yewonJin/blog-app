@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
+import { generateHeadingIds, TipTapNode } from '@/entities/node';
 import PostDetail from '@/widgets/PostDetail';
 
 const prisma = new PrismaClient();
@@ -36,6 +37,7 @@ export default async function Page({
   const post = await fetchPost(decodeURI(slug));
 
   if (!post) return <div>해당 게시글을 찾을 수 없습니다.</div>;
+  const indexedNode = generateHeadingIds(post.content as TipTapNode);
 
-  return <PostDetail post={post} />;
+  return <PostDetail post={post} indexedNode={indexedNode} />;
 }
