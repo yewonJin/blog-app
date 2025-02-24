@@ -1,16 +1,30 @@
 .prose :is(h1, h2, h3, h4, h5, h6) {
+  position: relative;
   color: var(--text-neutral-emphasis);
   scroll-margin-top: 32px;
 }
 
 .prose :is(h1, h2, h3, h4, h5, h6) > a {
+  opacity: 0;
+  position: absolute;
+  left: -24px;
   color: inherit;
   font-weight: 600;
   text-decoration: none;
 }
 
+.prose :is(h1, h2, h3, h4, h5, h6) > a::before {
+  content: '#';
+  width: 12px;
+  height: 24px;
+}
+
 .prose :is(h1, h2, h3, h4, h5, h6) > a:hover {
   color: var(--text-brand-primary);
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6):hover a {
+  opacity: 1;
 }
 
 .prose a {

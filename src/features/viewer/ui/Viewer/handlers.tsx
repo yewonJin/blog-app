@@ -42,37 +42,43 @@ export const nodeHandlers: TipTapNodeHandlers = {
       case 1:
         return (
           <h1 id={props.node.attrs.id} key={uuidv4()}>
-            <a href={`#${props.node.attrs.id}`}>{props.children}</a>
+            <a href={`#${props.node.attrs.id}`}>​&#8203;</a>
+            {props.children}
           </h1>
         );
       case 2:
         return (
           <h2 id={props.node.attrs.id} key={uuidv4()}>
-            <a href={`#${props.node.attrs.id}`}>{props.children}</a>
+            <a href={`#${props.node.attrs.id}`}>&#8203;</a>
+            {props.children}
           </h2>
         );
       case 3:
         return (
           <h3 id={props.node.attrs.id} key={uuidv4()}>
-            <a href={`#${props.node.attrs.id}`}>{props.children}</a>
+            <a href={`#${props.node.attrs.id}`}>&#8203;</a>
+            {props.children}
           </h3>
         );
       case 4:
         return (
           <h4 id={props.node.attrs.id} key={uuidv4()}>
-            <a href={`#${props.node.attrs.id}`}>{props.children}</a>
+            <a href={`#${props.node.attrs.id}`}>&#8203;</a>
+            {props.children}
           </h4>
         );
       case 5:
         return (
           <h5 id={props.node.attrs.id} key={uuidv4()}>
-            <a href={`#${props.node.attrs.id}`}>{props.children}</a>
+            <a href={`#${props.node.attrs.id}`}>&#8203;</a>
+            {props.children}
           </h5>
         );
       case 6:
         return (
           <h6 id={props.node.attrs.id} key={uuidv4()}>
-            <a href={`#${props.node.attrs.id}`}>{props.children}</a>
+            <a href={`#${props.node.attrs.id}`}>&#8203;</a>
+            {props.children}
           </h6>
         );
     }
