@@ -14,6 +14,7 @@ export type TipTapNodeHandlers = {
   horizontalRule: TipTapNodeHandler;
   image: TipTapNodeHandler<ImageNode>;
   hardBreak: TipTapNodeHandler;
+  video: TipTapNodeHandler<VideoNode>;
 };
 
 export type TipTapMarkHandlers = {
@@ -78,5 +79,12 @@ export interface ImageNode extends TipTapNode {
   attrs: {
     src: string;
     style: string;
+  };
+}
+
+export interface VideoNode extends TipTapNode {
+  type: 'video';
+  attrs: {
+    src: string;
   };
 }

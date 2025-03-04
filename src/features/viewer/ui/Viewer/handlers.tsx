@@ -114,4 +114,9 @@ export const nodeHandlers: TipTapNodeHandlers = {
       style={{ ...styleToObject(props.node.attrs.style) }}
     />
   ),
+  video: (props) => (
+    <video key={uuidv4()} controls>
+      <source src={props.node.attrs.src} />
+    </video>
+  ),
 };
