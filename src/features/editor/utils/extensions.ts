@@ -1,4 +1,4 @@
-import { Extensions } from '@tiptap/react';
+import { Extensions, mergeAttributes, Node } from '@tiptap/react';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
@@ -17,7 +17,29 @@ lowlight.register('css', css);
 lowlight.register('js', js);
 lowlight.register('ts', ts);
 
+const Video = Node.create({
+  name: 'video',
+  group: 'block',
+  selectable: true,
+  draggable: true,
+  atom: true,
+  parseHTML() {
+    return [{ tag: 'video' }];
+  },
+  addAttributes() {
+    return {
+      src: {
+        default: null,
+      },
+    };
+  },
+  renderHTML({ HTMLAttributes }) {
+    return ['video', { controls: true, ...mergeAttributes(HTMLAttributes) }];
+  },
+});
+
 export const extensions: Extensions = [
+  Video,
   StarterKit,
   Link,
   CodeBlockLowlight.configure({
