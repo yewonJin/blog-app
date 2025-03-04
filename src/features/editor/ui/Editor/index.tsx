@@ -42,7 +42,15 @@ export function Editor({ content, onEditorUpdate }: EditorProps) {
               });
 
               if (coordinates) {
-                const node = schema.nodes.image.create({ src: url });
+                let node;
+                const extensionName = url.split('.').at(-1);
+
+                if (extensionName === 'mp4') {
+                  node = schema.nodes.video.create({ src: url });
+                } else {
+                  node = schema.nodes.image.create({ src: url });
+                }
+
                 const transaction = view.state.tr.insert(coordinates.pos, node);
                 return view.dispatch(transaction);
               }
