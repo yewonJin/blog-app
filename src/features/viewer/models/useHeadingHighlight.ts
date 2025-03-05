@@ -5,7 +5,7 @@ export const useHeadingHighlight = (offsetTops: number[]) => {
 
   const onScroll = (offsets: number[]) => {
     setHighlightedIndex(
-      offsets.filter((item) => item <= window.scrollY).length,
+      offsets.filter((item) => item <= window.scrollY + 60).length - 1,
     );
   };
 

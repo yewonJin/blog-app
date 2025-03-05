@@ -48,6 +48,23 @@ html[data-theme='dark'] {
   font-family: var(--font-jetBrainsMono);
   background: none;
 }
+.hljs-variable,
+.hljs-template-variable,
+.hljs-number,
+.hljs-literal,
+.hljs-type,
+.hljs-link,
+.hljs-built_in,
+.hljs-title,
+.hljs-selector-id,
+.hljs-tag,
+.hljs-doctag,
+.hljs-attribute,
+.hljs-template-tag,
+.hljs-meta .hljs-keyword,
+.hljs-punctuation {
+  color: var(--panda-syntax-variable-number-type);
+}
 
 .hljs-emphasis {
   font-style: italic;
@@ -106,21 +123,4 @@ html[data-theme='dark'] {
 .hljs-title.class_.inherited__,
 .hljs-meta .hljs-string {
   color: var(--panda-syntax-string-symbol-class);
-}
-.hljs-variable,
-.hljs-template-variable,
-.hljs-number,
-.hljs-literal,
-.hljs-type,
-.hljs-link,
-.hljs-built_in,
-.hljs-title,
-.hljs-selector-id,
-.hljs-tag,
-.hljs-doctag,
-.hljs-attribute,
-.hljs-template-tag,
-.hljs-meta .hljs-keyword,
-.hljs-punctuation {
-  color: var(--panda-syntax-variable-number-type);
 }
