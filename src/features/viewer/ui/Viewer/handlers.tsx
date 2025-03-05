@@ -98,7 +98,7 @@ export const nodeHandlers: TipTapNodeHandlers = {
       </pre>
     );
   },
-  horizontalRule: () => <hr />,
+  horizontalRule: () => <hr key={uuidv4()} />,
   blockquote: (props) => (
     <blockquote key={uuidv4()}>{props.children}</blockquote>
   ),
