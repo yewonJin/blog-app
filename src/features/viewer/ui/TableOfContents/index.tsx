@@ -6,7 +6,7 @@ import { cn } from '@/shared/utils';
 
 type Props = {
   node: TipTapNode;
-  offsetTops: number[];
+  ref: React.RefObject<HTMLDivElement | null>;
 };
 
 const headingPaddings: { [key in HeadingNode['attrs']['id']]: string } = {
@@ -18,8 +18,8 @@ const headingPaddings: { [key in HeadingNode['attrs']['id']]: string } = {
   6: 'pl-9',
 };
 
-export function TableOfContents({ node, offsetTops }: Props) {
-  const { highlightedIndex } = useHeadingHighlight(offsetTops);
+export function TableOfContents({ node, ref }: Props) {
+  const { highlightedIndex, handleHeadingClick } = useHeadingHighlight(ref);
 
   if (!node.content) return null;
 
@@ -52,6 +52,7 @@ export function TableOfContents({ node, offsetTops }: Props) {
               )}
               key={heading.attrs.id}
               href={`#${heading.attrs.id}`}
+              onClick={() => handleHeadingClick(index)}
             >
               {heading.content?.[0]?.text}
             </a>

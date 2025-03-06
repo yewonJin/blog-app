@@ -1,7 +1,7 @@
 'use client';
 
 import { Category, Post } from '@prisma/client';
-import { Suspense, useCallback, useState } from 'react';
+import { Suspense, useRef } from 'react';
 
 import { TipTapNode } from '@/entities/node';
 import { TiptapViewer, TableOfContents } from '@/features/viewer';
@@ -15,21 +15,7 @@ type Props = {
 };
 
 export default function PostDetail({ post, indexedNode }: Props) {
-  const [offsetTops, setOffsetTops] = useState<number[]>([]);
-
-  const ref = useCallback((node: HTMLDivElement) => {
-    if (node !== null) {
-      const headings = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
-
-      setOffsetTops(
-        Array.from(node.children[0].children)
-          .filter((node): node is HTMLElement =>
-            headings.includes(node.nodeName),
-          )
-          .map((node) => node.offsetTop),
-      );
-    }
-  }, []);
+  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <div className="mx-auto flex w-full justify-center gap-12">
@@ -53,7 +39,7 @@ export default function PostDetail({ post, indexedNode }: Props) {
         </div>
       </div>
       <div className="hidden w-[250px] xl:block">
-        <TableOfContents node={indexedNode} offsetTops={offsetTops} />
+        <TableOfContents ref={ref} node={indexedNode} />
       </div>
     </div>
   );
