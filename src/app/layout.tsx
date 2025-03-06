@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import TopNav from '@/widgets/TopNav';
+import Footer from '@/widgets/Footer';
 import { setInitialThemeMode } from '@/features/theme';
 
 const pretendard = localFont({
@@ -56,6 +57,7 @@ export default function RootLayout({
         ></script>
         <TopNav />
         {children}
+        <Footer />
       </body>
     </html>
   );

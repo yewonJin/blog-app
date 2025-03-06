@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '3mb',
     },
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
   images: {
     remotePatterns: [
@@ -14,6 +22,14 @@ const nextConfig: NextConfig = {
         hostname: 'doromo-blog-app.s3.ap-northeast-2.amazonaws.com',
       },
     ],
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+
+    return config;
   },
 };
 
