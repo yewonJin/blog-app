@@ -10,6 +10,7 @@ export {
   type HeadingNode,
   type CodeBlockNode,
   type ImageNode,
+  type VideoNode,
 } from './models/interface';
 
 export { generateHeadingIds } from './utils/headingUtils';

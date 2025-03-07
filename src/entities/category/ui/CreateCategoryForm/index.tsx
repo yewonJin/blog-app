@@ -11,10 +11,7 @@ const initialState = {
 };
 
 export function CreateCategoryForm() {
-  const [state, formAction] = useActionState(
-    createCategoryAction,
-    initialState,
-  );
+  const [, formAction] = useActionState(createCategoryAction, initialState);
 
   return (
     <form action={formAction}>

@@ -5,6 +5,7 @@ import {
   CodeBlockNode,
   HeadingNode,
   ImageNode,
+  VideoNode,
   LinkMark,
   TextNode,
   TipTapMark,
@@ -78,6 +79,11 @@ export function TiptapViewer({ node }: TipTapViewerProps): React.ReactNode {
     return nodeHandlers[node.type]({
       node,
       children: <br className="ProseMirror-trailingBreak" />,
+    });
+  } else if (node.type === 'video') {
+    return nodeHandlers['video']({
+      node: node as VideoNode,
+      children,
     });
   } else {
     return nodeHandlers[node.type]({
