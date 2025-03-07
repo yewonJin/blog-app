@@ -1,14 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Category, Post } from '@prisma/client';
 
+import { PostPreview } from '@/entities/post';
 import { getRelativeTime } from '@/shared/utils';
 import { Divider } from '@/shared/ui';
 
 type Props = {
-  posts: (Omit<Post, 'categoryId' | 'content' | 'createdAt'> & {
-    category: Category;
-  })[];
+  posts: PostPreview[];
 };
 
 export function Home({ posts }: Props) {
