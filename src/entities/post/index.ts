@@ -1,4 +1,5 @@
-export { type PostFormState } from './models/postTypes';
+export { type PostFormState, type PostPreview } from './models/postTypes';
 
-export { createPostAction, updatePostAction } from './utils/formActions';
 export { uploadImage } from './utils/actions';
+export { createPostAction, updatePostAction } from './utils/formActions';
+export { sortByUpdatedAt } from './utils/sort';
