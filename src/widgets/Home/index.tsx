@@ -28,7 +28,9 @@ export function Home({ posts }: Props) {
             />
           </div>
           <div className="flex flex-col gap-3 p-4">
-            <h2 className="my-1 text-xl font-semibold">{post.title}</h2>
+            <h2 className="my-1 truncate text-xl font-semibold">
+              {post.title}
+            </h2>
             <p className="line-clamp-3 text-neutral-tertiary">{post.preview}</p>
             <Divider direction="horizontal" />
             <div className="flex justify-between">
