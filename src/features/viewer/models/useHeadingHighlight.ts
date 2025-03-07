@@ -30,7 +30,7 @@ export const useHeadingHighlight = (
 
     const upwardScrollObserver = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && entry.boundingClientRect.y < 100) {
           const currentHeading = entry.target as HTMLElement;
           const currentIndex = headingElements.indexOf(currentHeading);
           setHighlightedIndex(currentIndex - 1);
