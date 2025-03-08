@@ -17,37 +17,29 @@ export const useHeadingHighlight = (
       HEADING_TAGS.includes(node.nodeName),
     );
 
-    const downwardScrollObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting && entry.boundingClientRect.y < 100) {
-          const currentHeading = entry.target as HTMLElement;
-          const currentIndex = headingElements.indexOf(currentHeading);
+        const currentHeading = entry.target as HTMLElement;
+        const currentIndex = headingElements.indexOf(currentHeading);
+
+        if (!entry.isIntersecting && entry.boundingClientRect.y < 160) {
           setHighlightedIndex(currentIndex);
         }
-      },
-      { rootMargin: '-70px 0px' },
-    );
 
-    const upwardScrollObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && entry.boundingClientRect.y < 100) {
-          const currentHeading = entry.target as HTMLElement;
-          const currentIndex = headingElements.indexOf(currentHeading);
+        if (entry.isIntersecting && entry.boundingClientRect.y < 160) {
           setHighlightedIndex(currentIndex - 1);
         }
       },
-      { rootMargin: '-70px 0px' },
+      { rootMargin: '-150px 0px' },
     );
 
     headingElements.forEach((heading) => {
-      downwardScrollObserver.observe(heading);
-      upwardScrollObserver.observe(heading);
+      observer.observe(heading);
     });
 
     return () => {
       headingElements.forEach((heading) => {
-        downwardScrollObserver.unobserve(heading);
-        upwardScrollObserver.unobserve(heading);
+        observer.unobserve(heading);
       });
     };
   }, [ref]);
