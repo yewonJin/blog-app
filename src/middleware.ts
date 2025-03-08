@@ -4,34 +4,42 @@ import { NextRequest } from 'next/server';
 import { isVerifiedJWT } from '@/features/auth';
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    const token = request.cookies.get('jwt')?.value;
+  const token = request.cookies.get('jwt')?.value;
+  const response = NextResponse.next();
 
+  if (request.nextUrl.pathname.startsWith('/admin')) {
     if (!token) {
       return NextResponse.redirect(new URL('/login', request.url));
     }
 
-    if (!isVerifiedJWT(token)) {
-      request.cookies.delete('jwt');
+    try {
+      const isValid = await isVerifiedJWT(token);
+      if (!isValid) {
+        response.cookies.delete('jwt');
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
+      return response;
+    } catch (e) {
+      console.error('JWT verification error:', e);
+      response.cookies.delete('jwt');
       return NextResponse.redirect(new URL('/login', request.url));
     }
-
-    return NextResponse.next();
   }
 
   if (request.nextUrl.pathname.startsWith('/login')) {
-    const token = request.cookies.get('jwt')?.value;
+    if (!token) return response;
 
-    if (!token) return NextResponse.next();
-
-    if (!isVerifiedJWT(token)) {
-      return NextResponse.next();
+    try {
+      const isValid = await isVerifiedJWT(token);
+      if (!isValid) {
+        response.cookies.delete('jwt');
+        return response;
+      }
+      return NextResponse.redirect(new URL('/', request.url));
+    } catch (e) {
+      console.error('JWT verification error:', e);
+      response.cookies.delete('jwt');
+      return response;
     }
-
-    return NextResponse.redirect(new URL('/', request.url));
   }
 }
-
-export const config = {
-  matcher: ['/admin/:path*', '/login'],
-};
