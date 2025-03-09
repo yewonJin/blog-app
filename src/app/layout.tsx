@@ -6,33 +6,12 @@ import Footer from '@/widgets/Footer';
 import { setInitialThemeMode } from '@/features/theme';
 
 const pretendard = localFont({
-  src: [
-    {
-      path: '../../public/fonts/Pretendard-Bold.subset.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Pretendard-Semibold.subset.woff2',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Pretendard-Regular.subset.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/Pretendard-Light.subset.woff2',
-      weight: '300',
-      style: 'normal',
-    },
-  ],
+  src: './fonts/PretendardVariable.woff2',
   variable: '--font-pretendard',
 });
 
 const jetBrainsMono = localFont({
-  src: '../../public/fonts/JetBrainsMono-Regular.woff2',
+  src: './fonts/JetBrainsMono-Regular.woff2',
   weight: '400',
   variable: '--font-jetBrainsMono',
 });
