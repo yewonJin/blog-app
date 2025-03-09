@@ -1,8 +1,20 @@
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 import './globals.css';
 import TopNav from '@/widgets/TopNav';
 import Footer from '@/widgets/Footer';
 import { setInitialThemeMode } from '@/features/theme';
+
+const pretendard = localFont({
+  src: './fonts/PretendardVariable.woff2',
+  variable: '--font-pretendard',
+});
+
+const jetBrainsMono = localFont({
+  src: './fonts/JetBrainsMono-Regular.woff2',
+  weight: '400',
+  variable: '--font-jetBrainsMono',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`mx-auto px-4 xl:px-0`}>
+      <body
+        className={`${pretendard.className} ${pretendard.variable} ${jetBrainsMono.variable} mx-auto px-4 xl:px-0`}
+      >
         <script
           dangerouslySetInnerHTML={{ __html: setInitialThemeMode }}
         ></script>
