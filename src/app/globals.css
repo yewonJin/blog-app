@@ -99,6 +99,6 @@ body {
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: var(--bg-neutral-secondary);
+  background: var(--bg-neutral-tertiary);
   border-radius: 12px;
 }
