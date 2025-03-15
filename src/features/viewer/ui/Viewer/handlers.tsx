@@ -91,7 +91,7 @@ export const nodeHandlers: TipTapNodeHandlers = {
     const highlightedElements = getHighlightedElements(props);
 
     return (
-      <pre key={uuidv4()} className="hljs">
+      <pre key={uuidv4()} className="hljs scrollbar">
         <code className={`language-${language}`}>
           {renderSyntaxHighlightedCode(highlightedElements, [])}
         </code>
