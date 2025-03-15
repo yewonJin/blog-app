@@ -24,7 +24,7 @@ export function TableOfContents({ node, ref }: Props) {
   if (!node.content) return null;
 
   return (
-    <div className="fixed mt-4 border-l-[1px] border-neutral-secondary pl-4">
+    <div className="fixed mt-4 max-h-[50vh] overflow-y-auto border-l-[1px] border-neutral-secondary pl-4">
       <div
         className={cn(
           'absolute -left-[1px] h-6 w-[2px] rounded-sm bg-brand-primary duration-200',
